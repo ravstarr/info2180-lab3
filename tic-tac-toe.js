@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     const squares = document.querySelectorAll('#board div');
     const statusDiv = document.getElementById('status');
+    const newGameButton = document.querySelector('.btn');
     let currentPlayer = 'X';
-    const gameState = ['', '', '', '', '', '', '', '', ''];
+    let gameState = ['', '', '', '', '', '', '', '', ''];
     let gameActive = true;
     
     // Winning combinations
     const winningConditions = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-        [0, 4, 8], [2, 4, 6]             // Diagonals
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
     ];
     
     // Layout the board
@@ -54,6 +55,20 @@ document.addEventListener('DOMContentLoaded', function() {
         
         square.addEventListener('mouseleave', function() {
             square.classList.remove('hover');
+        });
+    });
+    
+    // Restart game
+    newGameButton.addEventListener('click', function() {
+        gameState = ['', '', '', '', '', '', '', '', ''];
+        gameActive = true;
+        currentPlayer = 'X';
+        statusDiv.textContent = 'Move your mouse over a square and click to play an X or an O.';
+        statusDiv.classList.remove('you-won');
+        
+        squares.forEach(function(square) {
+            square.textContent = '';
+            square.classList.remove('X', 'O');
         });
     });
 });
