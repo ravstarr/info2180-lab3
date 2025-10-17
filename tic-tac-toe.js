@@ -11,15 +11,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click event to each square
     squares.forEach(function(square, index) {
         square.addEventListener('click', function() {
-            // Only add if square is empty
             if (gameState[index] === '') {
                 square.textContent = currentPlayer;
                 square.classList.add(currentPlayer);
                 gameState[index] = currentPlayer;
-                
-                // Switch player
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
             }
+        });
+        
+        // Add hover effect
+        square.addEventListener('mouseover', function() {
+            if (gameState[index] === '') {
+                square.classList.add('hover');
+            }
+        });
+        
+        square.addEventListener('mouseleave', function() {
+            square.classList.remove('hover');
         });
     });
 });
