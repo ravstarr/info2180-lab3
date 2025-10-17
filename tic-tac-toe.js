@@ -1,15 +1,25 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2865
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\f0\fs24 \cf0 document.addEventListener('DOMContentLoaded', function() \{\
-    // Layout the board\
-    const squares = document.querySelectorAll('#board div');\
-    \
-    squares.forEach(function(square) \{\
-        square.classList.add('square');\
-    \});\
-\});}
+document.addEventListener('DOMContentLoaded', function() {
+    const squares = document.querySelectorAll('#board div');
+    let currentPlayer = 'X';
+    const gameState = ['', '', '', '', '', '', '', '', ''];
+    
+    // Layout the board
+    squares.forEach(function(square) {
+        square.classList.add('square');
+    });
+    
+    // Add click event to each square
+    squares.forEach(function(square, index) {
+        square.addEventListener('click', function() {
+            // Only add if square is empty
+            if (gameState[index] === '') {
+                square.textContent = currentPlayer;
+                square.classList.add(currentPlayer);
+                gameState[index] = currentPlayer;
+                
+                // Switch player
+                currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+            }
+        });
+    });
+});
